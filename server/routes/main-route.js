@@ -1,4 +1,5 @@
 var express = require('express');
+const { verify } = require('jsonwebtoken');
 var router = express.Router();
 
 const ctrl = {
@@ -12,7 +13,7 @@ const ctrl = {
 /*----------  GET  ----------*/
 
   /* Clients */
-    router.get("/clients", ctrl.clients.getAllClients)
+    router.get("/clients", verify, ctrl.clients.getAllClients)
     router.get("/clients/:id", ctrl.clients.getSingleClient)
   /* Clients */
 
@@ -44,7 +45,6 @@ const ctrl = {
   /* Clients */
     router.put("/clients/update", ctrl.clients.updateClient)
   /* Clients */
-
 
   /* Items */
     router.put("/items/update", ctrl.items.updateAnItem)

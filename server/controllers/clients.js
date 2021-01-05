@@ -1,10 +1,15 @@
+var auth = require("../authconfig/middleWare")
+const { sub } = require("../connection/sk")
 
 
 class clients {
 
     /* GET */
         static getAllClients(req, res, next){
+           if(req.jwtFromRequest("bearer")){
             res.send("All Clients will be shown via this path")
+           }
+
         }
 
         static getSingleClient(req, res, next){
