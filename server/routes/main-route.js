@@ -1,6 +1,10 @@
 var express = require('express');
-const { verify } = require('jsonwebtoken');
 var router = express.Router();
+var jwtFunctions = {
+  sign: require("../authconfig/jwtConfig").sign,
+  verify: require("../authconfig/jwtConfig").authenticateToken
+} 
+
 
 const ctrl = {
   clients: require("../controllers/clients.js"),
@@ -9,12 +13,11 @@ const ctrl = {
 }
 
 
-
 /*----------  GET  ----------*/
 
   /* Clients */
-    router.get("/clients", verify, ctrl.clients.getAllClients)
-    router.get("/clients/:id", ctrl.clients.getSingleClient)
+    router.get("/clients", ctrl.clients.getAllClients)
+    router.get("/clients/:id", jwtFunctions.verify, ctrl.clients.getSingleClient)
   /* Clients */
 
   /* Items */
@@ -43,11 +46,11 @@ const ctrl = {
 /*---------- PUT  ----------*/
 
   /* Clients */
-    router.put("/clients/update", ctrl.clients.updateClient)
+    router.put("/clients/update/:id", jwtFunctions.verify, ctrl.clients.updateClient)
   /* Clients */
 
   /* Items */
-    router.put("/items/update", ctrl.items.updateAnItem)
+    router.put("/items/update/:id", ctrl.items.updateAnItem)
   /* Items */
 
 /*----------  PUT  ----------*/

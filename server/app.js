@@ -3,10 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-let ejs = require('ejs');
+var ejs = require('ejs');
 var mysql = require("./connection/connect");
 var cors = require("cors");
-var jwt = require("jsonwebtoken");
 var passport = require("passport");
 
 var indexRouter = require('./routes/main-route');
